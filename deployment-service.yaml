@@ -33,5 +33,4 @@ spec:
     - protocol: TCP
       port: 80          # Port on which the service will be accessible
       targetPort: 8080
-      nodePort: 30080 # Port your container is listening on
   type: NodePort   # Change to ClusterIP or NodePort as needed
