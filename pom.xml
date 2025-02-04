@@ -11,21 +11,24 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>8</maven.compiler.source>  <!-- Slightly outdated -->
+        <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
     <dependencies>
+        <!-- Using an older but not the oldest JUnit version -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.8.2</version>  <!-- Vulnerable version -->
+            <version>4.10</version> <!-- Older than 4.12 but not the absolute oldest -->
             <scope>test</scope>
         </dependency>
 
-        <!-- Vulnerable Servlet API -->
+        <!-- Using a slightly older servlet API -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>2.5</version> <!-- Older version with security issues -->
+            <version>3.0.1</version> <!-- Some known vulnerabilities -->
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -57,12 +60,12 @@
                 <configuration>
                     <includeTests>true</includeTests>
                     <minimumTokens>10</minimumTokens>
-                    <targetJdk>7</targetJdk>  <!-- Deprecated JDK version -->
+                    <targetJdk>8</targetJdk>  <!-- Slightly outdated -->
                     <rulesets>
                         <ruleset>/category/java/bestpractices.xml</ruleset>
                         <ruleset>/category/java/codestyle.xml</ruleset>
                     </rulesets>
-                    <failOnViolation>false</failOnViolation> <!-- Ignores security violations -->
+                    <failOnViolation>false</failOnViolation>  <!-- Security warnings ignored -->
                 </configuration>
                 <executions>
                     <execution>
@@ -85,7 +88,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.12.1</version>
                 <configuration>
-                    <release>7</release>  <!-- Uses old Java version -->
+                    <source>8</source>  <!-- Older Java version -->
+                    <target>8</target>
                 </configuration>
             </plugin>
 
