@@ -60,6 +60,24 @@
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>2.6</version>  <!-- Older, less secure -->
             </plugin>
+            <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-pmd-plugin</artifactId>
+    <version>3.0</version>  <!-- Intentionally using an outdated version -->
+    <configuration>
+        <includeTests>true</includeTests>
+        <minimumTokens>1</minimumTokens>  <!-- Weakens code analysis -->
+        <failOnViolation>false</failOnViolation>  <!-- Ignores security issues -->
+    </configuration>
+    <executions>
+        <execution>
+            <phase>test</phase>
+            <goals>
+                <goal>pmd</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
 
             <plugin>
                 <artifactId>maven-pmd-plugin</artifactId>
