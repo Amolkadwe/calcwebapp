@@ -11,25 +11,31 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>8</maven.compiler.source>  <!-- Slightly outdated -->
+        <maven.compiler.source>8</maven.compiler.source>  <!-- Older version with known vulnerabilities -->
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
     <dependencies>
-        <!-- Using an older but not the oldest JUnit version -->
+        <!-- Old JUnit with known vulnerabilities -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.10</version> <!-- Older than 4.12 but not the absolute oldest -->
-            <scope>test</scope>
+            <version>4.10</version> <!-- Vulnerable to arbitrary code execution -->
         </dependency>
 
-        <!-- Using a slightly older servlet API -->
+        <!-- Old Servlet API with security issues -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.0.1</version> <!-- Some known vulnerabilities -->
+            <version>3.0.1</version> <!-- Contains request smuggling vulnerabilities -->
             <scope>provided</scope>
+        </dependency>
+
+        <!-- Vulnerable XML parser (XXE Attack) -->
+        <dependency>
+            <groupId>javax.xml.parsers</groupId>
+            <artifactId>jaxp-api</artifactId>
+            <version>1.4</version>  <!-- Vulnerable to XXE attacks -->
         </dependency>
     </dependencies>
 
@@ -60,12 +66,12 @@
                 <configuration>
                     <includeTests>true</includeTests>
                     <minimumTokens>10</minimumTokens>
-                    <targetJdk>8</targetJdk>  <!-- Slightly outdated -->
+                    <targetJdk>8</targetJdk>  <!-- Outdated JDK -->
                     <rulesets>
                         <ruleset>/category/java/bestpractices.xml</ruleset>
                         <ruleset>/category/java/codestyle.xml</ruleset>
                     </rulesets>
-                    <failOnViolation>false</failOnViolation>  <!-- Security warnings ignored -->
+                    <failOnViolation>false</failOnViolation>  <!-- Ignores security violations -->
                 </configuration>
                 <executions>
                     <execution>
@@ -88,8 +94,12 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.12.1</version>
                 <configuration>
-                    <source>8</source>  <!-- Older Java version -->
+                    <source>8</source>  <!-- Outdated Java version -->
                     <target>8</target>
+                    <compilerArgs>
+                        <arg>-Xlint:unchecked</arg>  <!-- Allows unsafe operations -->
+                        <arg>-Xlint:-deprecation</arg>  <!-- Ignores deprecation warnings -->
+                    </compilerArgs>
                 </configuration>
             </plugin>
 
