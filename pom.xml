@@ -20,7 +20,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.10</version> <!-- Vulnerable to arbitrary code execution -->
+            <version>4.12</version> <!-- Vulnerable to arbitrary code execution -->
         </dependency>
 
         <!-- Old Servlet API with security issues -->
